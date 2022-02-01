@@ -17,6 +17,7 @@
     "url": "https://github.com/Sly-Ry/Just-Tech-News/issues"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
     "mysql2": "^2.3.3",

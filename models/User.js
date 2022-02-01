@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
+// The hashing done by bcrypt is CPU intensive, so the sync version will block other functions from running, effectively stalling the application until the hashing process has been completed.
+const bcrypt = require('bcrypt');
 
 // create our User Model
 class User extends Model {}
@@ -45,6 +47,21 @@ User.init(
         }
     },
     {
+        hooks: {
+            // set up beforeCreate lifestyle "hook" functionality
+            // The async keyword is used as a prefix to the function that contains the asynchronous function.
+            async beforeCreate(newUserData) {
+                // We pass in the "userData" object that contains the plaintext password in the "password" property and a saltRound value of 10.
+                // await can be used to prefix the async function, which will then gracefully assign the value from the response to the newUserData's password property.
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
+                return newUserData;
+            },
+            // set up beforeUpdate lifestyle "hook" functionality
+            async beforeUpdate(updatedUserData) {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                return updatedUserData;
+            }
+        },
         sequelize,
         timestamps: false,
         freezeTableName: true,
