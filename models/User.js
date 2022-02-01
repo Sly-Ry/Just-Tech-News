@@ -63,6 +63,7 @@ User.init(
                 return newUserData;
             },
             // set up beforeUpdate lifestyle "hook" functionality
+            // Allows logic to be executed in the model before a new instance object is updated
             async beforeUpdate(updatedUserData) {
                 updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
                 return updatedUserData;
