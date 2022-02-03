@@ -7,7 +7,13 @@ router.get('/', (req, res) => {
     console.log('============');
     Post.findAll({
         // Query configuration
-        attributes: ['id', 'post_url', 'title', 'created_at'],
+        attributes: [
+          'id', 
+          'post_url', 
+          'title', 
+          'created_at',
+          [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+        ],
         order: [['created_at', 'DESC']],
         // the include property is expressed as an array of objects. To define this object, we need a reference to the model(User) and attributes(username). 
         include: [
@@ -25,18 +31,24 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Post.findOne({
-        where: {
-            id: req.params.id
-        },
-        attributes: ['id', 'post_url', 'title', 'created_at'],
-        include: [
-            {
-                model: User,
-                attributes: ['username']
-            }
-        ]
-    })
+  Post.findOne({
+    where: {
+      id: req.params.id
+    },
+    attributes: [
+      'id',
+      'post_url',
+      'title',
+      'created_at',
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+  })
         .then(dbPostData => {
             if (!dbPostData) {
                 res.status(404).json({ message: 'No post found with this id' });
@@ -136,4 +148,5 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err);
       });
   });
+
 module.exports = router;
