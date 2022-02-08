@@ -14,3 +14,6 @@ Three brackets will render the data as HTML.
 Two brackets will convert HTML characters to strings. For instance, "<" would become "&lt";
     Ex. Two brackets as {{ title }}. 
 
+The express-session library allows us to connect to the back end. 
+
+The connect-session-sequelize library automatically stores the sessions created by express-session into our database.
