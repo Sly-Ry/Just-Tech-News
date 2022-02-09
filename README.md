@@ -17,3 +17,5 @@ Two brackets will convert HTML characters to strings. For instance, "<" would be
 The express-session library allows us to connect to the back end. 
 
 The connect-session-sequelize library automatically stores the sessions created by express-session into our database.
+
+Clicking on one of the comment-count links should route you to the single-post page, thanks to the templated <a> elements that we set up earlier (e.g., <a href="/post/{{post.id}}">).
