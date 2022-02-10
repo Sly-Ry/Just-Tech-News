@@ -5,7 +5,8 @@
   "main": "server.js",
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "express-session": "^1.17.2",
+    "jest": "^27.5.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.15.0"
   }
