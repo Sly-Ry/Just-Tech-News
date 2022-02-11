@@ -21,3 +21,5 @@ The connect-session-sequelize library automatically stores the sessions created 
 Clicking on one of the comment-count links should route you to the single-post page, thanks to the templated <a> elements that we set up earlier (e.g., <a href="/post/{{post.id}}">).
 
 A [partial] is a templating technique that helps minimize the repeated code across templates by extracting smaller components from a template to reuse in other templates.
+
+next() Calls the next middleware function; is a reference to the next callback function.
