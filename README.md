@@ -1,4 +1,5 @@
 # Just-Tech-News
+A JavaScript application that utilizes Handlebars and MVC.
 
 both cleartext and plaintext refer to unencrypted text.
 
